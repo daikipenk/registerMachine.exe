@@ -6,14 +6,13 @@ import utilityClasses.Instruction
 
 class Machine (fileContent: List<String>, input: String) {
     val inputTape = Input(input.toCharArray().toList())
-    val memory = Memory(mutableListOf());
+    val memory = Memory();
     val pointer = Pointer()
     val program: List<Instruction> = Parser(this).parseFile(fileContent)
 
     var haltProgram: Boolean = false
     fun startProgram() {
-        while (!haltProgram) {
-            if (program.size < pointer.value) {HALT(); haltProgram = true}
+        while (program.size > pointer.value) {
             val instruction = program[pointer.value]
             if (instruction.command is HALT) {haltProgram = true} // Check if command == HALT command
 

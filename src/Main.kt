@@ -1,5 +1,4 @@
 import utilityClasses.PathReader
-import java.io.File
 
 fun main(vararg args: String) {
     require(args.size <= 2) {"required FilePath [INPUT]"}

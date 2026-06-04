@@ -5,13 +5,13 @@ import utilityClasses.Addressing
 import utilityClasses.Operand
 
 class WRITE (val machine: Machine, val opcode: Operand) : Command {
-    val register = machine.memory.register
+    val mem = machine.memory
 
     override fun execute() {
         when (opcode.addressing) {
             Addressing.immediate -> print(opcode.value.toChar())
-            Addressing.direct -> print(register[opcode.value].toChar())
-            Addressing.indirect -> println(register[register[opcode.value]].toChar())
+            Addressing.direct -> print(mem.get(opcode.value).toChar())
+            Addressing.indirect -> print(mem.get(mem.get(opcode.value)).toChar())
         }
     }
 }
