@@ -1,3 +1,19 @@
-fun main() {
+import utilityClasses.PathReader
+import java.io.File
 
+fun main(vararg args: String) {
+    require(args.size <= 2) {"required FilePath [INPUT]"}
+
+    val fileContent = PathReader().readPath(args[0])
+    var input: String
+
+    try {
+        input = args[1]
+    }
+    catch (_: Exception) {
+        print("Please enter an input: ")
+        input = readln().trim()
+    }
+
+    Machine(fileContent, input).startProgram()
 }

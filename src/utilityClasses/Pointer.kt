@@ -1,3 +1,3 @@
 package utilityClasses
 
-data class Pointer(var point: Int = 0)
+data class Pointer(var value: Int = 0)
