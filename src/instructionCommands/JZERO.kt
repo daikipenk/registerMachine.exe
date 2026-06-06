@@ -8,13 +8,13 @@ class JZERO (val machine: Machine, val opcode: String): Command {
             var succeeded: Boolean = false
             for (i in 0..machine.program.size-1) {
                 if (machine.program[i].label == opcode) {
-                    machine.pointer.value = i -1 // This is needed because +1 is added after all commands
+                    machine.pointer.set(i-1) // This is needed because +1 is added after all commands
                     succeeded = true
                     break
                 }
             }
             if (!succeeded) println("Label not found!")
         }
-        else machine.pointer.value += 1
+        // No need to add +1 here because it is already added in the machine
     }
 }

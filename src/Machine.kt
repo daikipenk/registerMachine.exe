@@ -12,12 +12,12 @@ class Machine (fileContent: List<String>, input: String) {
 
     var haltProgram: Boolean = false
     fun startProgram() {
-        while (program.size > pointer.value) {
-            val instruction = program[pointer.value]
+        while (program.size > pointer.getValue()) {
+            val instruction = program[pointer.getValue()]
             if (instruction.command is HALT) {haltProgram = true} // Check if command == HALT command
 
             instruction.command.execute()
-            pointer.value += 1
+            pointer.set(pointer.getValue()+1)
         }
     }
 }
