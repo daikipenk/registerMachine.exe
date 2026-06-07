@@ -8,11 +8,14 @@ class Parser (val machine: Machine) {
         val program: MutableList<Instruction> = mutableListOf()
 
         for (i in fileContent) {
-            val trimmed = i.substringBefore("//").trim().split(" ").filter {it.isNotBlank()}
+            val trimmed = i.substringBefore("//").trim().split(" ")
             if (trimmed[0].isBlank()) {continue} // just to prevent an empty line from crashing the machine
             var index: Int = 0
 
             while (true) {
+                if (trimmed[index].isBlank()) {
+                    index += 1
+                }
                 when (trimmed[index]) {
                     "LOAD" -> {
                         program.add(Instruction(LOAD(machine, findOpcode(trimmed[index + 1])), label(index, trimmed[0])))
@@ -67,7 +70,7 @@ class Parser (val machine: Machine) {
     }
 
     fun label(index: Int, label: String) : String? {
-        if (index == 1) {
+        if (index != 0) {
             return label.removeSuffix(":")
         }
         else {
