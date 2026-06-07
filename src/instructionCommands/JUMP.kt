@@ -12,6 +12,6 @@ class JUMP (val machine: Machine, val opcode: String) : Command {
                 break
             }
         }
-        if (!succeeded) println("Label not found!")
+        if (!succeeded) throw Exception("Label not found!")
     }
 }

@@ -13,7 +13,7 @@ class JGTZ (val machine: Machine, val opcode: String): Command {
                     break
                 }
             }
-            if (!succeeded) println("Label not found!")
+            if (!succeeded) throw Exception("Label not found!")
         }
         else {machine.pointer.set(machine.pointer.getValue() + 1)}
     }
