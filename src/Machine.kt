@@ -10,11 +10,10 @@ class Machine (fileContent: List<String>, input: String) {
     val pointer = Pointer()
     val program: List<Instruction> = Parser(this).parseFile(fileContent)
 
-    var haltProgram: Boolean = false
     fun startProgram() {
         while (program.size > pointer.getValue()) {
             val instruction = program[pointer.getValue()]
-            if (instruction.command is HALT) {haltProgram = true} // Check if command == HALT command
+            if (instruction.command is HALT) {break} // Check if command == HALT command
 
             instruction.command.execute()
             pointer.set(pointer.getValue()+1)
