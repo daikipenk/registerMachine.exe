@@ -1,4 +1,7 @@
 import instructionCommands.HALT
+import instructionCommands.JGTZ
+import instructionCommands.JUMP
+import instructionCommands.JZERO
 import utilityClasses.Input
 import utilityClasses.Memory
 import utilityClasses.Pointer
@@ -16,7 +19,13 @@ class Machine (fileContent: List<String>, input: String) {
             if (instruction.command is HALT) {break} // Check if command == HALT command
 
             instruction.command.execute()
-            pointer.set(pointer.getValue()+1)
+
+            when (instruction.command) {
+                is JUMP -> continue
+                is JGTZ -> continue
+                is JZERO -> continue
+                else -> pointer.set(pointer.getValue()+1)
+            }
         }
     }
 }

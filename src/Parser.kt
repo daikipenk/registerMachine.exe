@@ -8,7 +8,7 @@ class Parser (val machine: Machine) {
         val program: MutableList<Instruction> = mutableListOf()
 
         for (i in fileContent) {
-            val trimmed = i.substringBefore("//").trim().split(" ")
+            val trimmed = i.substringBefore("//").trim().split(" ").filter {it.isNotBlank()}
             if (trimmed[0].isBlank()) {continue} // just to prevent an empty line from crashing the machine
             var index: Int = 0
 
