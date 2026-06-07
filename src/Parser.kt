@@ -13,9 +13,6 @@ class Parser (val machine: Machine) {
             var index: Int = 0
 
             while (true) {
-                if (trimmed[index].isBlank()) {
-                    index += 1
-                }
                 when (trimmed[index]) {
                     "LOAD" -> {
                         program.add(Instruction(LOAD(machine, findOpcode(trimmed[index + 1])), label(index, trimmed[0])))
