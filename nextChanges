@@ -1,0 +1,20 @@
+Just notes for next Changes!
+
+Basically, the idea if to change the current parsing system! And by doing that, it allows for multiple changes throughout the whole project!
+
+First of... I need to disassemble the current parsing method and also the command system!
+Making use of the Visitor pattern allows for a much greater range of possibilities...
+
+The parsing system will now consist of "stages"
+ - First, conversion of file into bytes!
+ - Secondly, creation of class to convert bytes into characters
+ - Third step, creation of a class "tokenizer" which creates tokens out of characters
+ - Fourth step, parsing system, transforming tokens into fully fledged commands and/or full instructions
+ - Lastly, create an "interpreter" which will connect all the inputs and outputs between all classes/stages
+
+* IMPORTANT: All of this process must be made with the use of sequences (lazy)
+
+Regarding the commands itself... remove the execute() function from them and create an accept() function...
+This allows for all execution commands to be handled in a single "machine" which will also take care of the memory and instruction process...
+This visitor pattern allows us to make more functionalities for the commands, since if we wanted to... we could use the instructions to create a better formatted instruction set...
+It allows for many opportunities!
