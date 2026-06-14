@@ -1,3 +1,4 @@
+/*
 import instructionCommands.HALT
 import instructionCommands.JGTZ
 import instructionCommands.JUMP
@@ -6,12 +7,13 @@ import utilityClasses.Input
 import utilityClasses.Memory
 import utilityClasses.Pointer
 import utilityClasses.Instruction
+import java.io.File
 
-class Machine (fileContent: List<String>, input: String) {
+class Machine (file: File, input: String) {
     val inputTape = Input(input.toCharArray().toList())
     val memory = Memory();
     val pointer = Pointer()
-    val program: List<Instruction> = Parser(this).parseFile(fileContent)
+    val program: List<Instruction> = Parser(this).parseFile(file)
 
     fun startProgram() {
         while (program.size > pointer.getValue()) {
@@ -29,3 +31,4 @@ class Machine (fileContent: List<String>, input: String) {
         }
     }
 }
+ */

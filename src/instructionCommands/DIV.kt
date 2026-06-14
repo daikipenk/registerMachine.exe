@@ -1,10 +1,10 @@
 package instructionCommands
 
-import Machine
+import Interpreter
 import utilityClasses.Addressing
 import utilityClasses.Operand
 
-class DIV (val machine: Machine, val opcode: Operand) : Command {
+class DIV (val machine: Interpreter, val opcode: Operand) : Command {
     val mem = machine.memory
 
     override fun execute() {

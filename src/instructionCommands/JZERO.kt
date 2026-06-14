@@ -1,8 +1,8 @@
 package instructionCommands
 
-import Machine
+import Interpreter
 
-class JZERO (val machine: Machine, val opcode: String): Command {
+class JZERO (val machine: Interpreter, val opcode: String): Command {
     override fun execute() {
         if (machine.memory.get(0) == 0) {
             var succeeded: Boolean = false

@@ -1,3 +1,4 @@
+/*
 import instructionCommands.*
 import utilityClasses.Addressing
 import utilityClasses.Instruction
@@ -83,3 +84,4 @@ class Parser (val machine: Machine) {
         }
     }
 }
+ */

@@ -1,10 +1,10 @@
 package instructionCommands
 
-import Machine
+import Interpreter
 import utilityClasses.Addressing
 import utilityClasses.Operand
 
-class MULT (val machine: Machine, val opcode: Operand) : Command {
+class MULT (val machine: Interpreter, val opcode: Operand) : Command {
     val mem = machine.memory
 
     override fun execute() {

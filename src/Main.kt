@@ -3,7 +3,7 @@ import utilityClasses.PathReader
 fun main(vararg args: String) {
     require(args.size <= 2) {"required FilePath [INPUT]"}
 
-    val fileContent = PathReader().readPath(args[0])
+    val file = PathReader().readPath(args[0])
     var input: String
 
     try {
@@ -14,5 +14,6 @@ fun main(vararg args: String) {
         input = readln().trim()
     }
 
-    Machine(fileContent, input).startProgram()
+    Interpreter(file, input).interpret()
+    // Machine(file, input).startProgram()
 }
