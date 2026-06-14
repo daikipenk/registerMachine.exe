@@ -11,10 +11,17 @@ class Tokenizer {
         return sequence<Token> {
             val currentToken = StringBuilder()
             var hasCommand: Boolean = false
+            var ignore: Boolean = false
+
             for (i in chars) {
                 when(i) {
+                    '/' -> {ignore = true; column++}
                     ' ' -> {
-                        if (currentToken.isNotEmpty() && !hasCommand) {
+                        if (ignore) {
+                            column++
+                            continue
+                        }
+                        else if (currentToken.isNotEmpty() && !hasCommand) {
                             yield(Token(TokenType.COMMAND, currentToken.toString(), row, column))
                             column++
                             currentToken.clear()
@@ -31,20 +38,35 @@ class Tokenizer {
                         column++
                         currentToken.clear()
                     }
-                    '\n' -> {
-                        if (currentToken.isNotEmpty() && !hasCommand) {
+                    '\r' -> { // This is before each new line
+                        if (ignore) {
+                            column++
+                            continue
+                        }
+                        else if (currentToken.isNotEmpty() && !hasCommand) {
                             yield(Token(TokenType.COMMAND, currentToken.toString(), row, column))
                         }
                         else if(currentToken.isNotEmpty()) {
                             yield(Token(TokenType.OPERAND, currentToken.toString(), row, column))
                         }
-
+                        currentToken.clear()
+                    }
+                    '\n' -> {
                         row++
                         column = 0
                         currentToken.clear()
                         hasCommand = false
+                        ignore = false
                     }
                     else -> currentToken.append(i)
+                }
+            }
+            if (currentToken.isNotEmpty() && !ignore) {
+                if (!hasCommand) {
+                    yield(Token(TokenType.COMMAND, currentToken.toString(), row, column))
+                }
+                else {
+                    yield(Token(TokenType.OPERAND, currentToken.toString(), row, column))
                 }
             }
         }

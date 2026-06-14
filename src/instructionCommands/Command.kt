@@ -1,5 +1,7 @@
 package instructionCommands
 
+import CommandVisitor.CommandVisitor
+
 interface Command {
-    fun execute()
+    fun accept(visitor: CommandVisitor)
 }

@@ -1,3 +1,6 @@
+import CommandVisitor.CommandExecutor
+import utilityClasses.Input
+import utilityClasses.Instruction
 import utilityClasses.PathReader
 
 fun main(vararg args: String) {
@@ -14,6 +17,6 @@ fun main(vararg args: String) {
         input = readln().trim()
     }
 
-    Interpreter(file, input).interpret()
-    // Machine(file, input).startProgram()
+    val program: List<Instruction> = Interpreter(file).interpret()
+    CommandExecutor(Input(input.toCharArray().toList()), program).run()
 }

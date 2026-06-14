@@ -1,17 +1,10 @@
 package instructionCommands
 
-import Interpreter
-import utilityClasses.Addressing
+import CommandVisitor.CommandVisitor
 import utilityClasses.Operand
 
-class WRITE (val machine: Interpreter, val opcode: Operand) : Command {
-    val mem = machine.memory
-
-    override fun execute() {
-        when (opcode.addressing) {
-            Addressing.immediate -> print(opcode.value.toChar())
-            Addressing.direct -> print(mem.get(opcode.value).toChar())
-            Addressing.indirect -> print(mem.get(mem.get(opcode.value)).toChar())
-        }
+class WRITE (val opcode: Operand) : Command {
+    override fun accept(visitor: CommandVisitor) {
+        visitor.visitWRITE(this)
     }
 }
